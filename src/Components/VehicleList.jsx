@@ -1,48 +1,34 @@
-import { Stack,Form,Button } from "react-bootstrap";
+import { Stack,InputGroup,Form} from "react-bootstrap";
+import { useFilter } from "../Context/filterProvider";
 
 function VehicleList() {
+  const { filterDispatch, vehicleList : filteredVehicles } = useFilter();
+
+  const searchChangeHandler = (e) => {
+    const { value } = e.target;
+    filterDispatch({ type: "SEARCH", payload: value.toLowerCase() })
+  };
+
   return (
     <div className="container">
       <div className="my-4">
-        <Form>
-          <Form.Group className="mb-2" controlId="formBasicText">
-            <Form.Control
-              type="text"
-              placeholder="Enter vehicle registration number"
-              required
-            />
-          </Form.Group>
-          <Button variant="primary" type="submit">
-            Search
-          </Button>
-        </Form>
+        <InputGroup className="mb-3">
+          <Form.Control
+            placeholder="Enter registration number"
+            aria-label="Search Bar"
+            aria-describedby="basic-addon1"
+            onChange={(e)=>searchChangeHandler(e)}
+          />
+        </InputGroup>
       </div>
       <div>
         <Stack gap={1}>
-            <div className="bg-light border p-3">211035</div>
-            <div className="bg-light border p-3">211035</div>
-            <div className="bg-light border p-3">211035</div>
-            <div className="bg-light border p-3">211035</div>
-            <div className="bg-light border p-3">211035</div>
-            <div className="bg-light border p-3">211035</div>
-            <div className="bg-light border p-3">211035</div>
-            <div className="bg-light border p-3">211035</div>
-            <div className="bg-light border p-3">211035</div>
-            <div className="bg-light border p-3">211035</div>
-            <div className="bg-light border p-3">211035</div>
-            <div className="bg-light border p-3">211035</div>
-            <div className="bg-light border p-3">211035</div>
-            <div className="bg-light border p-3">211035</div>
-            <div className="bg-light border p-3">211035</div>
-            <div className="bg-light border p-3">211035</div>
-            <div className="bg-light border p-3">211035</div>
-            <div className="bg-light border p-3">211035</div>
-            <div className="bg-light border p-3">211035</div>
-            <div className="bg-light border p-3">211035</div>
-            <div className="bg-light border p-3">211035</div>
-            <div className="bg-light border p-3">211035</div>
-            <div className="bg-light border p-3">211035</div>
-            <div className="bg-light border p-3">211035</div>
+        {filteredVehicles && filteredVehicles.map(({registrationNumber, id})=>{
+                return(
+                  <div className="bg-light border p-3" key={id}>{registrationNumber}</div>
+                );
+            })
+          }
         </Stack>
       </div>
     </div>

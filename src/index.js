@@ -6,13 +6,19 @@ import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from './Context/authProvider';
+import { VehicleProvider } from './Context/vehicleProvider';
+import { FilterProvider } from './Context/filterProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthProvider>
-        <App />
+        <VehicleProvider>
+          <FilterProvider>
+            <App />
+          </FilterProvider>
+        </VehicleProvider>
       </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>

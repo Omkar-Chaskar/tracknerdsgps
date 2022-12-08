@@ -6,7 +6,7 @@ function Dashboard() {
     <Container>
       <Row>
         <Col><VehicleList /></Col>
-        <Col xs={9}><VehicleMap /></Col>
+        <Col xs={7}><VehicleMap /></Col>
       </Row>
     </Container>
   )

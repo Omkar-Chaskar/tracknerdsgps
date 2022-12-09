@@ -1,8 +1,10 @@
 import { Stack,InputGroup,Form} from "react-bootstrap";
 import { useFilter } from "../Context/filterProvider";
+import { useVehicle } from "../Context/vehicleProvider";
 
 function VehicleList() {
   const { filterDispatch, vehicleList : filteredVehicles } = useFilter();
+  const { vehicleState } = useVehicle();
 
   const searchChangeHandler = (e) => {
     const { value } = e.target;
@@ -23,7 +25,7 @@ function VehicleList() {
       </div>
       <div>
         <Stack gap={1}>
-        {filteredVehicles && filteredVehicles.map(({registrationNumber, id})=>{
+        {(filteredVehicles.length>0?filteredVehicles:vehicleState).map(({registrationNumber, id})=>{
                 return(
                   <div className="bg-light border p-3" key={id}>{registrationNumber}</div>
                 );

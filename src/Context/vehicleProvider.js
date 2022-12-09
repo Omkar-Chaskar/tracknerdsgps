@@ -15,7 +15,7 @@ const VehicleProvider = ({ children }) => {
           const {data} = await axios({
             method: "get",
             url: "https://staging-api.tracknerd.io/v1/vehicle-groups/vehicles",
-            headers: { "Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImplZXdhbi50aGFwYTlAZ21haWwuY29tIiwic3ViIjoxMDMsInBob25lIjoiOTgzMjM3Njk0MyIsImlhdCI6MTY3MDQ4NTE2M30.xsr2ucEd76WPCsndjA9Uy1VfRN8NvF_SKnqq2tiI7E4" }
+            headers: { "Authorization":`Bearer ${JSON.parse(localStorage.getItem("auth_token"))}` }
           });
           
           vehicleDispatch({ type: "GET_VEHICLES", payload: data.data[0].vehicles });
